@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "builds": [
+      {
+          "src": "webapps2024/wsgi.py",
+          "use": "@vercel/python",
+          "config": {
+              "runtime": "python3.9",
+              "installCommand": "pip3 install -r requirements.txt"
+          }
+      },
+      {
+          "src": "build.sh",
+          "use": "@vercel/static-build",
+          "config": {
+              "distDir": "staticfiles"
+          }
+      }
+  ],
+  "routes": [
+      {
+          "src": "/(.*)",
+          "dest": "webapps2024/wsgi.py"
+      },
+      {
+          "src": "/static/(.*)",
+          "dest": "/static/$1"
+      }
+  ]
+}
